@@ -1,8 +1,7 @@
 import React from 'react'
-import { Formik,Form,Field,FastField,ErrorMessage,FieldArray, } from 'formik'
+import { Formik,Form } from 'formik'
 import * as Yup from 'yup'
-import TextError from './TextError'
-
+import FormikControl from './Formik/FormikControl'
 const initialValues = {
   username: '',
   email: '',
@@ -10,19 +9,18 @@ const initialValues = {
   confirmPassword: '',
   
 }
-const onSubmit = values => {
-  console.log('Form data', values)
-}
 const validationSchema = Yup.object({
   username: Yup.string().required('Required'),
   email: Yup.string().email('Invalid email format').required('Required'),
   password: Yup.string().required('Required')
   .min(8, 'Password must be at least 8 characters')
   .max(15, 'Password must be less than 15 characters'),
-
-  confirmPassword: Yup.string().required('Required'),
+  confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required'),
 })
 
+const onSubmit = values => {
+  console.log('Form data', values)
+}
 
 
 
@@ -33,39 +31,23 @@ function SignUp() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
-    >
-      <Form>
-
-        <div className="form-control">
-        <label htmlFor="username">Username</label>
-        <Field id="username" name="username" type="text" />
-        <ErrorMessage name="username" component={TextError} />
-        </div><br/>
-
-        <div className="form-control">
-        <label htmlFor="email">Email</label>
-        <Field id="email" name="email" type="email" />
-        <ErrorMessage name="email" component={TextError} />
-        </div><br/>
-
-        <div className="form-control">
-        <label htmlFor="password">Password</label>
-        <Field id="password" name="password" type="password" />
-        <ErrorMessage name="password" component={TextError} />
-        </div><br/>
-
-        <div className="form-control">
-        <label htmlFor="confirmPassword">Confirm Password</label>
-        <Field id="confirmPassword" name="confirmPassword" type="password" />
-        <ErrorMessage name="confirmPassword" component={TextError} />
-        </div><br/>
-
-        <button type="submit">Submit</button>
-      </Form>
+    > 
+    {
+      formik => {
+        return (
+          <Form>
+            <FormikControl control="input" type="text" label="Username" name="username" placeholder="Username"/>
+            <FormikControl control="input" type="email" label="Email" name="email" placeholder="enter youer email" />
+            <FormikControl control="input" type="password" label="Password" name="password" placeholder="Password" />
+            <FormikControl control="input" type="password" label="Confirm Password" name="confirmPassword" placeholder="Confirm Password" />
+            <button type="submit" disabled={!formik.isValid}>Submit</button>
+          </Form>
+        )
+      }}
     </Formik>
-      
     
-  )
-}
+    
+  )}
 
 export default SignUp
+

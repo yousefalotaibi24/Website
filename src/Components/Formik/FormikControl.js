@@ -3,6 +3,9 @@ import Input from './Input'
 import Textarea from './Textarea'
 import Select from './Select'
 import RadioButtons from './RadioButtons'
+import Checkbox from './checkbox'
+import DatePicker from './DatePicker'
+// DO NOT TOUCH THIS FILE
 function FormikControl(props) {
     const {control, ...rest } = props
     switch (control) {
@@ -12,16 +15,12 @@ function FormikControl(props) {
           return <Textarea {...rest} />
         case 'select': return <Select {...rest} />
         case 'radio': return <RadioButtons {...rest} />
-        case 'checkbox':
-        case 'date':
+        case 'checkbox': return <Checkbox {...rest} />
+        case 'date': return <DatePicker {...rest} />
         default:
             return null
     }
-    // return (
-    //   <div>
-        
-    //   </div>
-    // )
+  
 }
 
 export default FormikControl
