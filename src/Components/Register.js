@@ -25,7 +25,7 @@ const onSubmit = values => {
 
 
 
-function SignUp() {
+function Register() {
   return (
     <Formik
       initialValues={initialValues}
@@ -40,7 +40,7 @@ function SignUp() {
             <FormikControl control="input" type="email" label="Email" name="email" placeholder="enter youer email" />
             <FormikControl control="input" type="password" label="Password" name="password" placeholder="Password" />
             <FormikControl control="input" type="password" label="Confirm Password" name="confirmPassword" placeholder="Confirm Password" />
-            <button type="submit" disabled={!formik.isValid}>Submit</button>
+            <button type="submit" disabled={!formik.isValid}>Register</button>
           </Form>
         )
       }}
@@ -49,5 +49,5 @@ function SignUp() {
     
   )}
 
-export default SignUp
+export default Register
 
