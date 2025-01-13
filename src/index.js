@@ -7,6 +7,12 @@ import Home from './Components/Home';
 import Login from './Components/Login';
 import Register from './Components/Register';
 import Profile from './Components/Profile';
+import Cuisines from './Components/Cuisines';
+import Restaurants from './Components/Restaurants';
+import Dishes from './Components/Dishes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -26,17 +32,30 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
+    path: "/cuisines",
+    element: <Cuisines />
+  },
+  {
+    path: "/restaurants",
+    element: <Restaurants />
+  },
+  {
+    path: "/dishes",
+    element: <Dishes />
+  },
+  {
     path: "/profile",
     element: <Profile />
-  }
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <QueryClientProvider client= { queryClient }>
+    <RouterProvider router={router}/>
+    <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
