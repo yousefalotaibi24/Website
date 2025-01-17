@@ -2,18 +2,25 @@ import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllRestaurants } from '../api/restaurant'
 import Nav from './Nav'
+
 const Restaurants = () => {
-    const {data, isLoading, isError} = useQuery({
+    if(!localStorage.getItem('token')){
+        window.location.href = '/'
+    }
+
+    const {data, isLoading, isError, error,isFetching, refetch} = useQuery({
         queryKey: ['restaurant'],
         queryFn: getAllRestaurants,
-        cacheTime:5000,
+        refetchInterval: 10000,
+        refetchIntervalInBackground: true,
+    
     })
     
     if(isLoading){
         return <div>Loading...</div>
     }
     if(isError){
-        return <div>Error</div>
+        return <div>{error.message}</div>
     }
     
     return (

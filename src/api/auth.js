@@ -1,6 +1,6 @@
 import instance from "../api/instance";
 import { setToken } from "./storage"
-
+import { useNavigate } from "react-router-dom";
 const register = async ({username, password, email, name}) => {
     const data = await instance.post(`http://localhost:8000/api/auth/register`, {username, password, email, name});
     setToken(data.token);
@@ -15,11 +15,8 @@ const login = async (userInfo) => {
 };
 
 const logout = async () => {
-    const data = await instance.post("http://localhost:8000/api/auth/logout");
-    setToken(null);
-    console.log("logout data", data)
-    return data;
+    localStorage.removeItem("token");
+    return true;
 };
-
 
 export { register, login, logout };

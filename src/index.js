@@ -43,6 +43,7 @@ const router = createBrowserRouter([
     path: "/dishes",
     element: <Dishes />
   },
+
   {
     path: "/profile",
     element: <Profile />

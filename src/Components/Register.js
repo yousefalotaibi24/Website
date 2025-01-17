@@ -51,7 +51,7 @@ function Register  () {
 
 
   return (
-    <>
+    <div>
     <Formik
     initialValues={initialValues}
     validationSchema={validationSchema}
@@ -70,13 +70,13 @@ function Register  () {
           </Form>
         )
       }}
-    </Formik>
+    </Formik><br></br>
     <div>
     <h1 >Register to your account</h1>
     <p > Already registered ? <br></br> <NavLink to="/login">Click Here</NavLink></p>
     </div>
     
-  </>
+  </div>
     
   )}
 

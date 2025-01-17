@@ -4,6 +4,9 @@ import Nav from './Nav'
 // import { getAllRestaurants } from '../api/restaurant'
 // import { getAllDishes } from '../api/dish'
 const Home = () => {
+  if(!localStorage.getItem('token')){
+    window.location.href = '/'
+  }
 
 
 

@@ -5,6 +5,7 @@ import { login } from '../api/auth'
 import FormikControl from './Formik/FormikControl'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate, NavLink } from "react-router-dom";
+import "../css/App.css"
 const initialValues = {
   username: '',
   // email: '',
@@ -45,7 +46,7 @@ const mutation = useMutation({
 
 
   return (
-    <>
+    <div className='App'>
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
       {
         formik => {
@@ -58,13 +59,12 @@ const mutation = useMutation({
             </Form>
           )}
       }
-    </Formik>
-      
+    </Formik><br></br>  
     <h1 className='heading'>Login to your account</h1>
     <p className='msg'> not yet registered ? <br></br> <NavLink to="/">Click Here</NavLink></p>
 
 
-</>
+</div>
   )
   
 

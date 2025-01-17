@@ -3,10 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllDishes } from '../api/dish'
 import Nav from './Nav'
 const Dishes = () => {
+    if(!localStorage.getItem('token')){
+        window.location.href = '/'
+    }
     const {data, isLoading, isError} = useQuery({
         queryKey: ['dish'],
         queryFn: getAllDishes,
-        cacheTime:5000
+        refetchInterval: 1000,
+        refetchIntervalInBackground: true
         })
 
         if(isLoading){
